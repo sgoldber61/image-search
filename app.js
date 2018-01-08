@@ -26,7 +26,7 @@ var collection;
 mongo.connect(dbUrl, function(err, client) {
   client.db("image_search").createCollection("image_search_latest", {
     capped: true,
-    size: 256 * 10000, // what size?
+    size: 256 * 100, // what size?
     max: 10
   });
   
