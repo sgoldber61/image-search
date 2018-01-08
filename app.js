@@ -18,7 +18,8 @@ var app = express();
 
 // require mongodb
 var mongo = require('mongodb').MongoClient;
-var dbUrl = "mongodb://localhost:27017/image_search"; // local version
+// local version: var dbUrl = "mongodb://localhost:27017/image_search";
+var dbUrl = process.env.MONGOLAB_URI;
 
 
 // begin by creating a capped collection!
