@@ -1,0 +1,28 @@
+{
+  "name": "image-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgoldber61/image-search.git"
+  },
+  "author": "sgoldber61",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgoldber61/image-search/issues"
+  },
+  "homepage": "https://github.com/sgoldber61/image-search#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "mongodb": "^3.0.1",
+    "nodemon": "^1.14.7",
+    "path": "^0.12.7",
+    "request": "^2.83.0"
+  }
+}

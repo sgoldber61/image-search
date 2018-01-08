@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      
+      .code-example {
+        font-family: monospace;
+        background-color: lightgray;
+        color: red;
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Search Abstraction Layer</h1>
+    <p>This is an API project for FreeCodeCamp with the following functionality (mostly copied from the FreeCodeCamp <a href="https://www.freecodecamp.org/challenges/image-search-abstraction-layer" target="_blank">site</a>):</p>
+    <ol>
+      <li>I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</li>
+      <li>I can paginate through the responses by adding a ?offset=2 parameter to the URL.</li>
+      <li>I can get a list of the most recently submitted search strings.</li>
+    </ol>
+    <h3>Example query usage:</h3>
+    <p class="code-example">https://app.com/search/donald%20trump?offset=10</p>
+    <h3>Example query output:</h3>
+    <p class="code-example">[
+{
+url: "http://s.newsweek.com/sites/www.newsweek.com/files/styles/full/public/2017/08/11/donald-trump-speaks.jpg",
+snippet: "German Police Seize Donald Trump Shaped Drugs Worth $46,000",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1E4-1i99zWGzq0rj0fHgGaRH_geiorBqdbSgO0X1xxCSZeZlopr03GCY",
+context: "http://www.newsweek.com/german-police-seize-drugs-shaped-donald-trump-worth-46000-652944"
+},
+{
+url: "https://media1.popsugar-assets.com/files/thumbor/T158S8lJjLeVd3geuKAL3Z0xdCQ/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2017/09/25/659/n/38761221/tmp_fiK0E7_3121d2a282ebedff_GettyImages-853191024.jpg",
+snippet: "Old Donald Trump Tweet on NFL, Redskins, and Barack Obama ...",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUWjxKuc5vOzjHRpC0RNCtvz_SlKY1zw_tcAY3OEPCsXBLqI8TwaJEihY",
+context: "https://www.popsugar.com/news/Old-Donald-Trump-Tweet-NFL-Redskins-Barack-Obama-44069787"
+},
+{
+url: "http://s.newsweek.com/sites/www.newsweek.com/files/styles/full/public/2017/08/21/donald-trump.JPG",
+snippet: "Donald Trump, Russia and Why the President Would Make a Terrible Spy",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5dsE2gWjMXxWcyMjQu-VuDfCtEdlmfZtg9S5PLnCGFxDw12uZVXWxRFL9",
+context: "http://www.newsweek.com/trump-russia-putin-spies-mueller-probe-steele-investigation-cia-fbi-moscow-653961"
+},
+{
+url: "https://www.gannett-cdn.com/-mm-/6587436c43de03cb15fa6149594cac5be06ddf2c/c=177-0-3221-2283&r=x404&c=534x401/local/-/media/2017/09/25/USATODAY/usatsports/1d4d743c7f5f4d62b61de47d826e082b.jpg",
+snippet: "Donald Trump tweets more on NFL national anthem protests and race",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHBDaM9YfupIncmBAQXogin0dUzw2PYzhfvaDKWdxSEoRLuquVOEU3D3wG",
+context: "https://www.usatoday.com/story/sports/nfl/2017/09/25/donald-trump-returns-twitter-comment-nfl-protests-discuss-race-national-anthem/699115001/"
+},
+{
+url: "https://static.politico.com/dims4/default/24d5fb9/2147483647/resize/1160x%3E/quality/90/?url=https%3A%2F%2Fstatic.politico.com%2F64%2F59%2Ffe2827c249f2aed501d34d6c0beb%2F21-donald-trump-61-ap-1160.jpg",
+snippet: "This Is How Donald Trump Thinks the U.S. Government Works ...",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrkGoy9-uXRR4M-4nwXyGAXpCXLyNpr5TADWVaels4Gdhx47rRCZyLd-t6",
+context: "https://www.politico.com/magazine/story/2017/10/08/donald-trump-government-215691"
+},
+{
+url: "https://www.newsmangh.com/wp-content/uploads/2017/11/Donald-Trump.jpg",
+snippet: "Trump Says 'Era of Strategic Patience Is Over' For North Korea",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsi1crZ7L_ZdcHuPCwx3B1RM0yxVKIyWkDGKIFNFH6uKWFVmCnKQXHwqwR",
+context: "https://www.newsmangh.com/trump-says-era-strategic-patience-north-korea/"
+},
+{
+url: "http://s.newsweek.com/sites/www.newsweek.com/files/styles/full/public/2017/06/03/donald-trump-climate-change-agreement-withdrawal.jpg",
+snippet: "Donald Trump's Exit From Paris Climate Deal Seals his Downfall",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfE8FAnBeZK2xxFsbTGROYt6mRSx7g9iwcEsV5CmGVkeBuwYc1SmVCNAFU",
+context: "http://www.newsweek.com/donald-trump-paris-climate-deal-downfall-620276"
+},
+{
+url: "http://c3.nrostatic.com/sites/default/files/styles/original_image_with_cropping/public/uploaded/donald-trump-pragmatist-not-conservative.jpg?itok=qZ3401jJ",
+snippet: "Donald Trump: Pragmatist Not Conservative | National Review",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdLerFaE2WSxLXdSPjJxjm-CUn9OYGVRMlbCIScZs2oJ4OJEQ4tGfHhj68",
+context: "http://www.nationalreview.com/article/442221/donald-trump-pragmatist-not-conservative"
+},
+{
+url: "http://www.wolfiewolfgang.com/wp-content/uploads/2017/11/donald-trump346-620x412.jpg",
+snippet: "A few of Donald Trump's favourite people – nice! – Wolfie Wolfgang",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3BJ5eKol6utbIwIpP3DPKPo25u-yJWNesRvGctBUlS6Ztge1XIBqUSJk",
+context: "http://www.wolfiewolfgang.com/?p=19286"
+},
+{
+url: "http://theduran.com/wp-content/uploads/2017/02/donald-trump-is-escalating-his-war-of-words-with-hillary-clinton.png",
+snippet: "The top five ways in which Donald Trump has changed America",
+thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjkgsudemMB77sc_z_45D-9xtFeYv2n3q_t0npKsEyN1CTalpncj7ImlDR",
+context: "http://theduran.com/top-five-ways-donald-trump-changed-america/"
+}
+]</p>
+    <h3>Example latest usage:</h3>
+    <p class="code-example">https://app.com/latest</p>
+    <h3>Example latest output:</h3>
+    <p class="code-example">[
+{
+term: "donald trump",
+when: "2018-01-03T22:20:25.961Z"
+},
+{
+term: "aircraft",
+when: "2018-01-03T19:28:33.436Z"
+},
+{
+term: "aircraft",
+when: "2018-01-03T19:27:47.231Z"
+},
+{
+term: "lolcats funny",
+when: "2018-01-03T19:25:43.381Z"
+},
+{
+term: "lolcats funny",
+when: "2018-01-03T14:59:01.544Z"
+},
+{
+term: "lolcats funny",
+when: "2018-01-03T13:29:39.454Z"
+},
+{
+term: "lolcats funny",
+when: "2018-01-03T13:14:46.538Z"
+},
+{
+term: "lolcats funny",
+when: "2018-01-03T12:57:25.839Z"
+},
+{
+term: "banana",
+when: "2018-01-03T12:41:47.690Z"
+},
+{
+term: "lolcats funny",
+when: "2018-01-03T12:40:29.486Z"
+}
+]</p>
+  </body>
+</html>
