@@ -1,7 +1,7 @@
 // search engine id (cx) and google api key: make sure to later make these environment variables
 var googleSearchData = {
-  cx: "013625214229824497897:ivtrkbjobea",
-  key: "AIzaSyAdMd0I_GZUlypsnGP_GrzBaeN0xRqNZCI",
+  cx: process.env.GOOGLE_CX,
+  key: process.env.GOOGLE_KEY,
   frontUrl: "https://www.googleapis.com/customsearch/v1"
 };
 
